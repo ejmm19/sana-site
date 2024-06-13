@@ -7,5 +7,13 @@
     </div>
 </footer>
 <?php wp_footer(); ?>
+<script>
+  function onClick(e) {
+    e.preventDefault();
+    grecaptcha.enterprise.ready(async () => {
+      const token = await grecaptcha.enterprise.execute('6LdqnvYpAAAAAFNzU-1vdRtVc_eGdtjO6As1Z-8J', {action: 'LOGIN'});
+    });
+  }
+</script>
 </body>
 </html>

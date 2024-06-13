@@ -1,0 +1,27 @@
+
+
+# BEGIN WordPress
+# Las directivas (líneas) entre «BEGIN WordPress» y «END WordPress» son
+# generadas dinámicamente y solo deberían ser modificadas mediante filtros de WordPress.
+# Cualquier cambio en las directivas que hay entre esos marcadores serán sobrescritas.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+# Begin AIOWPSEC Firewall
+<IfModule LiteSpeed>
+php_value auto_prepend_file '/home/u912106533/domains/sanamente.co/public_html/aios-bootstrap.php'
+</IfModule>
+<IfModule lsapi_module>
+php_value auto_prepend_file '/home/u912106533/domains/sanamente.co/public_html/aios-bootstrap.php'
+</IfModule>
+# End AIOWPSEC Firewall
+
