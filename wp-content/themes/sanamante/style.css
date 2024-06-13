@@ -370,6 +370,9 @@ header#mf-header-small {
   main.container {
     padding-top: 0;
   }
+  main {
+    padding-top: 0;
+  }
 }
 #product-list .row .product-item a {
   text-decoration: none;
