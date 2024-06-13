@@ -33,3 +33,32 @@
     </div>
     <div id="separator"></div>
 </header>
+<header id="mf-header-small">
+    <div class="container-fluid">
+        <div class="d-flex">
+            <div>
+                <a class="a-no-link" href="<?= get_home_url(); ?>">
+                    <img class="logo-ppal" src="<?= get_template_directory_uri().'/assets/img/sanamente-logo.png'; ?>"
+                         alt="<?= get_bloginfo( 'name' ) ?>">
+                    <span id="title-site">
+                    <?= get_bloginfo( 'name' ) ?>
+                </span>
+                </a>
+            </div>
+            <div class="div-icon-menu">
+                <a href="#" id="mf-menu-small">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="menu-movil">
+        <nav>
+            <?php wp_nav_menu([
+                'theme_location' => 'top_menu',
+                'menu_class' => 'menu-principal',
+                'container_class' => 'container-menu'
+            ]) ?>
+        </nav>
+    </div>
+</header>
