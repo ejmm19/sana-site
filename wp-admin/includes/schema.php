@@ -594,9 +594,9 @@ function populate_options( array $options = array() ) {
 		}
 
 		if ( in_array( $option, $fat_options, true ) ) {
-			$autoload = 'off';
+			$autoload = 'no';
 		} else {
-			$autoload = 'on';
+			$autoload = 'yes';
 		}
 
 		if ( ! empty( $insert ) ) {

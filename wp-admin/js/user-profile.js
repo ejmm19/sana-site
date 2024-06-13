@@ -5,7 +5,6 @@
 /* global ajaxurl, pwsL10n, userProfileL10n */
 (function($) {
 	var updateLock = false,
-		isSubmitting = false,
 		__ = wp.i18n.__,
 		$pass1Row,
 		$pass1,
@@ -16,8 +15,6 @@
 		$submitButtons,
 		$submitButton,
 		currentPass,
-		$form,
-		originalFormContent,
 		$passwordWrapper;
 
 	function generatePassword() {
@@ -457,12 +454,6 @@
 
 		bindPasswordForm();
 		bindPasswordResetLink();
-		$submitButtons.on( 'click', function() {
-			isSubmitting = true;
-		});
-
-		$form = $( '#your-profile, #createuser' );
-		originalFormContent = $form.serialize();
 	});
 
 	$( '#destroy-sessions' ).on( 'click', function( e ) {
@@ -490,10 +481,7 @@
 		if ( true === updateLock ) {
 			return __( 'Your new password has not been saved.' );
 		}
-		if ( originalFormContent !== $form.serialize() && ! isSubmitting ) {
-			return __( 'The changes you made will be lost if you navigate away from this page.' );
-		}
-	});
+	} );
 
 	/*
 	 * We need to generate a password as soon as the Reset Password page is loaded,

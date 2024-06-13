@@ -926,7 +926,7 @@ themes.view.Preview = themes.view.Details.extend({
 
 		currentPreviewDevice = this.$el.data( 'current-preview-device' );
 		if ( currentPreviewDevice ) {
-			self.togglePreviewDeviceButtons( currentPreviewDevice );
+			self.tooglePreviewDeviceButtons( currentPreviewDevice );
 		}
 
 		themes.router.navigate( themes.router.baseUrl( themes.router.themePath + this.model.get( 'id' ) ), { replace: false } );
@@ -988,10 +988,10 @@ themes.view.Preview = themes.view.Details.extend({
 			.addClass( 'preview-' + device )
 			.data( 'current-preview-device', device );
 
-		this.togglePreviewDeviceButtons( device );
+		this.tooglePreviewDeviceButtons( device );
 	},
 
-	togglePreviewDeviceButtons: function( newDevice ) {
+	tooglePreviewDeviceButtons: function( newDevice ) {
 		var $devices = $( '.wp-full-overlay-footer .devices' );
 
 		$devices.find( 'button' )

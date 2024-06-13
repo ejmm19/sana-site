@@ -10,10 +10,6 @@
 	"attributes": {
 		"textAlign": {
 			"type": "string"
-		},
-		"level": {
-			"type": "number",
-			"default": 0
 		}
 	},
 	"example": {},

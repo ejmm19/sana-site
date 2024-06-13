@@ -73,7 +73,6 @@
 	},
 	"supports": {
 		"anchor": true,
-		"splitting": true,
 		"align": false,
 		"alignWide": false,
 		"color": {

@@ -134,7 +134,6 @@ class WP_Debug_Data {
 
 		if ( ! $is_multisite ) {
 			$info['wp-paths-sizes'] = array(
-				/* translators: Filesystem directory paths and storage sizes. */
 				'label'  => __( 'Directories and Sizes' ),
 				'fields' => array(),
 			);
@@ -347,7 +346,6 @@ class WP_Debug_Data {
 		$is_writable_upload_dir         = wp_is_writable( $upload_dir['basedir'] );
 		$is_writable_wp_plugin_dir      = wp_is_writable( WP_PLUGIN_DIR );
 		$is_writable_template_directory = wp_is_writable( get_theme_root( get_template() ) );
-		$is_writable_fonts_dir          = wp_is_writable( wp_get_font_dir()['basedir'] );
 
 		$info['wp-filesystem'] = array(
 			'label'       => __( 'Filesystem Permissions' ),
@@ -377,11 +375,6 @@ class WP_Debug_Data {
 					'label' => __( 'The themes directory' ),
 					'value' => ( $is_writable_template_directory ? __( 'Writable' ) : __( 'Not writable' ) ),
 					'debug' => ( $is_writable_template_directory ? 'writable' : 'not writable' ),
-				),
-				'fonts'      => array(
-					'label' => __( 'The fonts directory' ),
-					'value' => ( $is_writable_fonts_dir ? __( 'Writable' ) : __( 'Not writable' ) ),
-					'debug' => ( $is_writable_fonts_dir ? 'writable' : 'not writable' ),
 				),
 			),
 		);
@@ -486,15 +479,6 @@ class WP_Debug_Data {
 				),
 				'plugins_size'   => array(
 					'label' => __( 'Plugins directory size' ),
-					'value' => $loading,
-					'debug' => 'loading...',
-				),
-				'fonts_path'   => array(
-					'label' => __( 'Fonts directory location' ),
-					'value' => wp_get_font_dir()['basedir'],
-				),
-				'fonts_size'   => array(
-					'label' => __( 'Fonts directory size' ),
 					'value' => $loading,
 					'debug' => 'loading...',
 				),
@@ -1652,7 +1636,6 @@ class WP_Debug_Data {
 			'themes_size'    => get_theme_root(),
 			'plugins_size'   => WP_PLUGIN_DIR,
 			'uploads_size'   => $upload_dir['basedir'],
-			'fonts_size'     => wp_get_font_dir()['basedir'],
 		);
 
 		$exclude = $paths;

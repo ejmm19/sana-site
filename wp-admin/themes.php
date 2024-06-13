@@ -215,9 +215,7 @@ if ( current_user_can( 'switch_themes' ) ) {
 } else {
 	$themes = wp_prepare_themes_for_js( array( wp_get_theme() ) );
 }
-
-$theme  = ! empty( $_REQUEST['theme'] ) ? sanitize_text_field( $_REQUEST['theme'] ) : '';
-$search = ! empty( $_REQUEST['search'] ) ? sanitize_text_field( $_REQUEST['search'] ) : '';
+wp_reset_vars( array( 'theme', 'search' ) );
 
 wp_localize_script(
 	'theme',

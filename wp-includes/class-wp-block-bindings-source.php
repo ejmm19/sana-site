@@ -36,6 +36,7 @@ final class WP_Block_Bindings_Source {
 	 */
 	public $label;
 
+
 	/**
 	 * The function used to get the value from the source.
 	 *
@@ -48,7 +49,7 @@ final class WP_Block_Bindings_Source {
 	 * The context added to the blocks needed by the source.
 	 *
 	 * @since 6.5.0
-	 * @var string[]|null
+	 * @var array|null
 	 */
 	public $uses_context = null;
 

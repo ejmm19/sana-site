@@ -32,11 +32,10 @@
 }
 .block-library-query-pattern__selection-modal .block-library-query-pattern__selection-search{
   background:#fff;
-  margin-bottom:-4px;
+  margin-bottom:2px;
   padding:16px 0;
   position:sticky;
   top:0;
-  transform:translateY(-4px);
   z-index:2;
 }
 

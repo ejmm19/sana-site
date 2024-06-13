@@ -833,13 +833,11 @@ function load_textdomain( $domain, $mofile, $locale = null ) {
 		 * the file path could be for an MO or PHP file.
 		 *
 		 * @since 6.5.0
-		 * @since 6.6.0 Added the `$locale` parameter.
 		 *
 		 * @param string $file   Path to the translation file to load.
 		 * @param string $domain The text domain.
-		 * @param string $locale The locale.
 		 */
-		$file = (string) apply_filters( 'load_translation_file', $file, $domain, $locale );
+		$file = (string) apply_filters( 'load_translation_file', $file, $domain );
 
 		$success = $i18n_controller->load_file( $file, $domain, $locale );
 
@@ -1207,7 +1205,7 @@ function load_script_textdomain( $handle, $domain = 'default', $path = '' ) {
 		$relative = trim( $relative, '/' );
 		$relative = explode( '/', $relative );
 
-		$languages_path = WP_LANG_DIR . '/plugins';
+		$languages_path = WP_LANG_DIR . '/' . $relative[0];
 
 		$relative = array_slice( $relative, 2 ); // Remove plugins/<plugin name> or themes/<theme name>.
 		$relative = implode( '/', $relative );
@@ -1507,25 +1505,25 @@ function get_available_languages( $dir = null ) {
  *
  * @since 3.7.0
  *
- * @global WP_Textdomain_Registry $wp_textdomain_registry WordPress Textdomain Registry.
- *
  * @param string $type What to search for. Accepts 'plugins', 'themes', 'core'.
  * @return array Array of language data.
  */
 function wp_get_installed_translations( $type ) {
-	global $wp_textdomain_registry;
-
 	if ( 'themes' !== $type && 'plugins' !== $type && 'core' !== $type ) {
 		return array();
 	}
 
-	$dir = 'core' === $type ? WP_LANG_DIR : WP_LANG_DIR . "/$type";
+	$dir = 'core' === $type ? '' : "/$type";
 
-	if ( ! is_dir( $dir ) ) {
+	if ( ! is_dir( WP_LANG_DIR ) ) {
 		return array();
 	}
 
-	$files = $wp_textdomain_registry->get_language_files_from_path( $dir );
+	if ( $dir && ! is_dir( WP_LANG_DIR . $dir ) ) {
+		return array();
+	}
+
+	$files = scandir( WP_LANG_DIR . $dir );
 	if ( ! $files ) {
 		return array();
 	}
@@ -1533,7 +1531,16 @@ function wp_get_installed_translations( $type ) {
 	$language_data = array();
 
 	foreach ( $files as $file ) {
-		if ( ! preg_match( '/(?:(.+)-)?([a-z]{2,3}(?:_[A-Z]{2})?(?:_[a-z0-9]+)?)\.(?:mo|l10n\.php)/', basename( $file ), $match ) ) {
+		if ( '.' === $file[0] || is_dir( WP_LANG_DIR . "$dir/$file" ) ) {
+			continue;
+		}
+		if ( ! str_ends_with( $file, '.po' ) ) {
+			continue;
+		}
+		if ( ! preg_match( '/(?:(.+)-)?([a-z]{2,3}(?:_[A-Z]{2})?(?:_[a-z0-9]+)?).po/', $file, $match ) ) {
+			continue;
+		}
+		if ( ! in_array( substr( $file, 0, -3 ) . '.mo', $files, true ) ) {
 			continue;
 		}
 
@@ -1541,25 +1548,7 @@ function wp_get_installed_translations( $type ) {
 		if ( '' === $textdomain ) {
 			$textdomain = 'default';
 		}
-
-		if ( str_ends_with( $file, '.mo' ) ) {
-			$pofile = substr_replace( $file, '.po', - strlen( '.mo' ) );
-
-			if ( ! file_exists( $pofile ) ) {
-				continue;
-			}
-
-			$language_data[ $textdomain ][ $language ] = wp_get_pomo_file_data( $pofile );
-		} else {
-			$pofile = substr_replace( $file, '.po', - strlen( '.l10n.php' ) );
-
-			// If both a PO and a PHP file exist, prefer the PO file.
-			if ( file_exists( $pofile ) ) {
-				continue;
-			}
-
-			$language_data[ $textdomain ][ $language ] = wp_get_l10n_php_file_data( $file );
-		}
+		$language_data[ $textdomain ][ $language ] = wp_get_pomo_file_data( WP_LANG_DIR . "$dir/$file" );
 	}
 	return $language_data;
 }
@@ -1587,41 +1576,6 @@ function wp_get_pomo_file_data( $po_file ) {
 		$headers[ $header ] = preg_replace( '~(\\\n)?"$~', '', $value );
 	}
 	return $headers;
-}
-
-/**
- * Extracts headers from a PHP translation file.
- *
- * @since 6.6.0
- *
- * @param string $php_file Path to a `.l10n.php` file.
- * @return string[] Array of file header values keyed by header name.
- */
-function wp_get_l10n_php_file_data( $php_file ) {
-	$data = (array) include $php_file;
-
-	unset( $data['messages'] );
-	$headers = array(
-		'POT-Creation-Date'  => 'pot-creation-date',
-		'PO-Revision-Date'   => 'po-revision-date',
-		'Project-Id-Version' => 'project-id-version',
-		'X-Generator'        => 'x-generator',
-	);
-
-	$result = array(
-		'POT-Creation-Date'  => '',
-		'PO-Revision-Date'   => '',
-		'Project-Id-Version' => '',
-		'X-Generator'        => '',
-	);
-
-	foreach ( $headers as $po_header => $php_header ) {
-		if ( isset( $data[ $php_header ] ) ) {
-			$result[ $po_header ] = $data[ $php_header ];
-		}
-	}
-
-	return $result;
 }
 
 /**

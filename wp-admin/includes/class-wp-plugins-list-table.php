@@ -90,8 +90,7 @@ class WP_Plugins_List_Table extends WP_List_Table {
 	public function prepare_items() {
 		global $status, $plugins, $totals, $page, $orderby, $order, $s;
 
-		$orderby = ! empty( $_REQUEST['orderby'] ) ? sanitize_text_field( $_REQUEST['orderby'] ) : '';
-		$order   = ! empty( $_REQUEST['order'] ) ? sanitize_text_field( $_REQUEST['order'] ) : '';
+		wp_reset_vars( array( 'orderby', 'order' ) );
 
 		/**
 		 * Filters the full array of plugins to list in the Plugins list table.
@@ -453,8 +452,8 @@ class WP_Plugins_List_Table extends WP_List_Table {
 		}
 		?>
 		<p class="search-box">
-			<label for="<?php echo esc_attr( $input_id ); ?>"><?php echo $text; ?></label>
-			<input type="search" id="<?php echo esc_attr( $input_id ); ?>" class="wp-filter-search" name="s" value="<?php _admin_search_query(); ?>" />
+			<label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo $text; ?>:</label>
+			<input type="search" id="<?php echo esc_attr( $input_id ); ?>" class="wp-filter-search" name="s" value="<?php _admin_search_query(); ?>" placeholder="<?php esc_attr_e( 'Search installed plugins...' ); ?>" />
 			<?php submit_button( $text, 'hide-if-js', '', false, array( 'id' => 'search-submit' ) ); ?>
 		</p>
 		<?php
