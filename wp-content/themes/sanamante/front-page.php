@@ -1,5 +1,5 @@
 <?php get_header(); ?>
-    <main class="container">
+    <main class="container-md">
         <?php if (have_posts()) : ?>
             <?php while (have_posts()) : ?>
                 <?php the_post(); ?>
