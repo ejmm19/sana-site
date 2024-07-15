@@ -1,2 +1,4 @@
 .env
-wp-content/themes/sanamante/assets/css/general.less
+/oldsite
+/old-data
+wp-config.php

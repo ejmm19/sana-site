@@ -26,3 +26,18 @@ function myFunction() {
         header.classList.remove("sticky");
     }
 }
+
+let menuMovil = jQuery("#menu-movil");
+let menuSmall = jQuery("#mf-menu-small");
+menuSmall.click((e) => {
+    e.preventDefault();
+    if (!menuMovil.hasClass('menu-on')) {
+        menuMovil.addClass('menu-on');
+        menuSmall.find('i.fas').removeClass('fa-bars');
+        menuSmall.find('i.fas').addClass('fa-times text-light');
+        return;
+    }
+    menuMovil.removeClass('menu-on');
+    menuSmall.find('i.fas').removeClass('fa-times text-light');
+    menuSmall.find('i.fas').addClass('fa-bars');
+});
