@@ -11,7 +11,8 @@ function substitution_predefined_texts($translation): array|string
         'View more' => 'Ver más',
         'Products' => 'Productos',
         'View product' => 'Ver producto',
-        'Socials' => 'Redes sociales'
+        'Socials' => 'Redes sociales',
+        'Calendar from' => 'Calendario de',
     ];
     return str_ireplace(array_keys($words), $words, $translation);
 }

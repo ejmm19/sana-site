@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "gulp": "^5.0.0",
+    "gulp-less": "^5.0.0",
+    "gulp-watch": "^5.0.1"
+  },
+  "devDependencies": {
+    "gulp-clean-css": "^4.3.0"
+  }
+}
