@@ -27,12 +27,27 @@ gulp.task('less-compile-plugins', function(done) {
         });
 });
 
+gulp.task('less-compile-plugin-front', function(done) {
+    console.log('Compilando y minificando LESS para el plugin front...');
+    return gulp.src('wp-content/plugins/booking-basic-sm/templates/frontend/css/calendar-front.less')
+        .pipe(less())
+        .pipe(cleanCSS({ compatibility: 'ie8' }))
+        .pipe(gulp.dest('wp-content/plugins/booking-basic-sm/templates/frontend/css'))
+        .on('end', () => {
+            console.log('Compilación y minificación del plugin front completada.');
+            done();
+        });
+});
+
 gulp.task('watch', function() {
     console.log('Observando cambios en LESS del tema...');
     gulp.watch('wp-content/themes/sanamante/assets/css/**/*.less', gulp.series('less-compile-theme'));
 
     console.log('Observando cambios en LESS del plugins...');
     gulp.watch('wp-content/plugins/booking-basic-sm/templates/wp-admin/css/**/*.less', gulp.series('less-compile-plugins'));
+
+    console.log('Observando cambios en LESS del plugin front...');
+    gulp.watch('wp-content/plugins/booking-basic-sm/templates/frontend/css/**/*.less', gulp.series('less-compile-plugin-front'));
 });
 
 gulp.task('default', gulp.series('watch'));

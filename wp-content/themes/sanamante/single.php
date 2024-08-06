@@ -2,20 +2,23 @@
     <main class="container post_type_custom_view">
         <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
                 <div class="row mt-5">
-                    <div class="col-md-4 col-12">
-                        <img src="<?php the_post_thumbnail_url('small'); ?>" width="100%" alt="<?php the_title() ?>">
-                    </div>
-                    <div class="col-md-8 col-12">
-                        <h1 class="my-3"><?php the_title() ?></h1>
-                        <?php the_content(); ?>
+                    <div class="col-md-12 col-12">
+                        <div class="row">
+                            <div class="col-1">
+                                <img src="<?php the_post_thumbnail_url('small'); ?>" width="100%" alt="<?php the_title() ?>">
+                            </div>
+                            <div class="col-11">
+                                <h1 class="my-3"><?php the_title() ?></h1>
+                                <?php the_content(); ?>
+                            </div>
+                        </div>
 
                         <?php if (get_post_type() === 'orientadores'): ?>
-                            <br><br><hr><br>
+                            <br><br>
                             <div class="row">
                                 <div class="col-sm-12 col-lg-12 mb-5">
-                                    <a href="#" class="btn btn-primary text-capitalize w-50">
-                                        Agendar con: <?= wp_trim_words(get_the_title(), '1', '') ?>
-                                    </a>
+                                    <?= do_shortcode( '[customer_schedule employee='.get_the_ID().']' ); ?>
+                                    <hr>
                                 </div>
                                 <?php if (!empty(get_field('redes_sociales'))): ?>
                                     <div class="col-sm-12 col-lg-12">

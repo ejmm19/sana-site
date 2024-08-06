@@ -1,0 +1,53 @@
+<div id="app" ref="CalendarPane">
+    <div class="row">
+        <div id="content-calendar-app" class="col-6" data-active-item='[employeeData]'>
+            <h5 class="text-center">Seleccione la fecha de agendamiento</h5>
+            <v-date-picker
+                    :disabled-dates='{ weekdays: [1] }'
+                    :attributes="attrs"
+                    is-expanded
+                    is-range
+                    :min-date='new Date()'
+                    :drag-attribute="selectDragAttribute"
+                    mode="dateTime"
+                    v-model="dateRange"
+                    :timezone="timezone"
+                    :valid-hours="validHours"
+                    :minute-increment="30"
+                    @dayclick="onDayClick($event)"
+                    dailyInterval="3"
+            />
+            {{ scheduleInfo | capitalize }}
+        </div>
+        <div class="col-6">
+            <h4>Información de agendamiento</h4>
+            <hr class="m-0">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Orientador : </td>
+                    <td>{{ employeeData.fullName }}</td>
+                </tr>
+                <tr>
+                    <td>Día : </td>
+                    <td>{{ daySelected | capitalize }}</td>
+                </tr>
+                <tr>
+                    <td>Hora de inicio : </td>
+                    <td>{{ timeStart }}</td>
+                </tr>
+                <tr>
+                    <td>Hora de finalización : </td>
+                    <td>{{ timeEnd }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <br><br>
+            <button class="btn btn-primary text-capitalize w-100" :disabled="disableForPay" v-on:click="proceedToPay">
+                Proceder al pago
+            </button>
+            <img :src="employeeData.logoPago" class="w-75 mx-5 mt-3" alt="wompi pago">
+
+        </div>
+    </div>
+</div>

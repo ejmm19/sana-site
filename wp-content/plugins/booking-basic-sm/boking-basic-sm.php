@@ -6,6 +6,7 @@ Version: 1.0
 Author: Eric Js
 */
 require_once 'model/Employees.php';
+require_once 'shortcodes/main.php';
 function agregar_menu_plugin() {
     add_menu_page(
         'Booking Basic',  // Título de la página
@@ -67,3 +68,23 @@ function showMenuItem2(): void
 {
     require_once plugin_dir_path(__FILE__) . '/templates/wp-admin/employees.php';
 }
+
+// in frontend
+/**
+ * @return void
+ */
+function pluginAssets(): void
+{
+    #wp_enqueue_script( 'vue', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', ['jquery'], '2', true );
+    wp_enqueue_script( 'wompi', 'https://checkout.wompi.co/widget.js', [], '1', true );
+
+    wp_enqueue_script( 'vue', 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js', ['jquery'], '2', true );
+    wp_enqueue_script( 'v-calendar', 'https://unpkg.com/v-calendar', ['vue'], '2.4.2', true );
+
+    #wp_enqueue_script( 'sweetalert2', 'https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js', [], '11.12.4', true );
+    #wp_enqueue_style('sweetalert2-style', 'https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css');
+
+    wp_enqueue_script('custom-script-frontend', plugin_dir_url(__FILE__)  . '/templates/frontend/js/script.js', ['v-calendar'], '1.0', true);
+    wp_enqueue_style('custom-style', plugin_dir_url(__FILE__)  . '/templates/frontend/css/calendar-front.css');
+}
+add_action('wp_enqueue_scripts', 'pluginAssets');

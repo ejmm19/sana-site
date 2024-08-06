@@ -13,6 +13,9 @@ function substitution_predefined_texts($translation): array|string
         'View product' => 'Ver producto',
         'Socials' => 'Redes sociales',
         'Calendar from' => 'Calendario de',
+        'Activity' => 'Actividades',
+        'Nothing for show' => 'Nada para mostrar',
+        'Schedule with' => 'Agendar con',
     ];
     return str_ireplace(array_keys($words), $words, $translation);
 }

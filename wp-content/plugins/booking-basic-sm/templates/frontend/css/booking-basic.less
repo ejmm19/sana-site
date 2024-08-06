@@ -1,0 +1,52 @@
+.vc-pane-container{
+  .vc-pane-layout{
+    .vc-pane{
+      .vc-weeks{
+        .vc-day{
+          span.vc-day-content.vc-focusable.is-disabled{
+            pointer-events: none !important;
+          }
+        }
+        .vc-day.is-today{
+          pointer-events: none !important;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+.vc-time-picker{
+  .vc-time-icon[data-v-f4e11af8]{
+    width: 20px;
+    height: 20px;
+    margin-top: 25px;
+  }
+  .vc-date-time{
+    .vc-time{
+      margin: 10px 0;
+    }
+  }
+  &:nth-of-type(1){
+    .vc-date-time{
+      .vc-date{
+        display: none;
+      }
+      &:before {
+        content: 'Seleccione la hora de inicio';
+      }
+    }
+  }
+  &:nth-of-type(2){
+    .vc-date-time{
+      .vc-date{
+        display: none;
+      }
+      &:before {
+        content: 'Seleccione la hora de fin';
+      }
+    }
+  }
+}
+.disabled-picker{
+  pointer-events: none;
+}

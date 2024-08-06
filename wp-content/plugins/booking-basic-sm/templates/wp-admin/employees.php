@@ -70,6 +70,8 @@ $employeeId = !empty($_POST['employeeId']) ? $_POST['employeeId'] : '';
 
             </div>
         </div>
-        <div class="col-4">....</div>
+        <div class="col-4">
+            <h2><?= __('Activity')?>: <span> <?= __('Nothing for show')?></span></h2>
+        </div>
     </div>
 </div>

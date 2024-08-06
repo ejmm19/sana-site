@@ -1,9 +1,4 @@
 <?php
-// Begin AIOWPSEC Firewall
-if (file_exists('/home/u912106533/domains/sanamente.co/public_html/aios-bootstrap.php')) {
-	include_once('/home/u912106533/domains/sanamente.co/public_html/aios-bootstrap.php');
-}
-// End AIOWPSEC Firewall
 /**
  * The base configuration for WordPress
  *
@@ -25,16 +20,16 @@ if (file_exists('/home/u912106533/domains/sanamente.co/public_html/aios-bootstra
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', 'u912106533_sanaNew' );
+define( 'DB_NAME', 'wordpress' );
 
 /** Database username */
-define( 'DB_USER', 'u912106533_sanaNew' );
+define( 'DB_USER', 'wordpress' );
 
 /** Database password */
-define( 'DB_PASSWORD', '901019Mm@*' );
+define( 'DB_PASSWORD', 'wordpress' );
 
 /** Database hostname */
-define( 'DB_HOST', 'localhost' );
+define( 'DB_HOST', 'db' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
@@ -84,7 +79,7 @@ $table_prefix = 'smwp_';
  *
  * @link https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/
  */
-define( 'WP_DEBUG', false );
+define( 'WP_DEBUG', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
 

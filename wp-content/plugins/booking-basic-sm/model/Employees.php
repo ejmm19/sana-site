@@ -7,6 +7,8 @@ use WP_Query;
 class Employees
 {
 
+    const string EMPLOYEES = 'orientadores';
+
     /**
      * @param int $posts_per_page
      * @param bool $isArray
@@ -15,7 +17,7 @@ class Employees
     public function getEmployees(int $posts_per_page = -1, bool $isArray = false): WP_Query|array
     {
         $args = [
-            'post_type' => 'orientadores',
+            'post_type' => self::EMPLOYEES,
             'posts_per_page' => $posts_per_page,
             'order' => 'ASC',
             'orderby' => 'title'
@@ -26,7 +28,8 @@ class Employees
             $response->the_post();
             $employees[] = [
                 'id' => get_the_ID(),
-                'name' => get_the_title(),
+                'fullName' => get_the_title(),
+                'name' => wp_trim_words(get_the_title(), '2', ''),
                 'image' => get_the_post_thumbnail_url(),
                 'calendar' => get_the_post_thumbnail_url(),
             ];
