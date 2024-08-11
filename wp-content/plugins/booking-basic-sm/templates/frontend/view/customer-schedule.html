@@ -1,7 +1,7 @@
 <div id="app" ref="CalendarPane">
     <div class="row">
         <div id="content-calendar-app" class="col-6" data-active-item='[employeeData]'>
-            <h5 class="text-center">Seleccione la fecha de agendamiento</h5>
+            <h5 class="text-center">Seleccione fecha y hora de su agendamiento</h5>
             <v-date-picker
                     :disabled-dates='{ weekdays: [1] }'
                     :attributes="attrs"
@@ -20,10 +20,30 @@
             {{ scheduleInfo | capitalize }}
         </div>
         <div class="col-6">
-            <h4>Información de agendamiento</h4>
+            <h4>Ingrese su información de agendamiento</h4>
             <hr class="m-0">
             <table class="table">
                 <tbody>
+                <tr>
+                    <td>Nombres y apellidos * : </td>
+                    <td width="70%">
+                        <input type="text" v-model="dataOrder.customerName" v-on:keypress="isLetter($event)" class="form-control" placeholder="Ingrese su Nombre y Apellido">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Correo electónico * : </td>
+                    <td>
+                        <input type="email" v-model="dataOrder.customerEmail" @blur="validateEmail($event)" class="form-control" placeholder="Ingrese su Correo electónico">
+                        <small class="text-danger">{{ msg.email }}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Celular de contacto * : </td>
+                    <td>
+                        <input type="tel" v-model="dataOrder.customerPhone" @blur="validatePhoneNumber" class="form-control" placeholder="Ingrese su Teléfono">
+                        <small class="text-danger">{{ msg.phone }}</small>
+                    </td>
+                </tr>
                 <tr>
                     <td>Orientador : </td>
                     <td>{{ employeeData.fullName }}</td>
@@ -42,12 +62,10 @@
                 </tr>
                 </tbody>
             </table>
-            <br><br>
+            <!--<img :src="employeeData.logoPago"alt="wompi pago">-->
             <button class="btn btn-primary text-capitalize w-100" :disabled="disableForPay" v-on:click="proceedToPay">
-                Proceder al pago
+                Agendar
             </button>
-            <img :src="employeeData.logoPago" class="w-75 mx-5 mt-3" alt="wompi pago">
-
         </div>
     </div>
 </div>

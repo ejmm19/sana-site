@@ -1,3 +1,31 @@
+/*let checkout = new WidgetCheckout({
+    currency: 'COP',
+    amountInCents: 2490000,
+    reference: 'AD002901221',
+    publicKey: 'pub_fENJ3hdTJxdzs3hd35PxDBSMB4f85VrgiY3b6s1',
+    signature: {integrity : '3a4bd1f3e3edb5e88284c8e1e9a191fdf091ef0dfca9f057cb8f408667f054d0'},
+    redirectUrl: 'https://transaction-redirect.wompi.co/check', // Opcional
+    expirationTime: '2023-06-09T20:28:50.000Z', // Opcional
+    taxInCents: { // Opcional
+        vat: 1900,
+        consumption: 800
+    },
+    customerData: { // Opcional
+        email:'lola@gmail.com',
+        fullName: 'Lola Flores',
+        phoneNumber: '3040777777',
+        phoneNumberPrefix: '+57',
+        legalId: '123456789',
+        legalIdType: 'CC'
+    },
+    shippingAddress: { // Opcional
+        addressLine1: "Calle 123 # 4-5",
+        city: "Bogota",
+        phoneNumber: '3019444444',
+        region: "Cundinamarca",
+        country: "CO"
+    }
+})*/
 const start = new Date();
 new Vue({
     el: '#app',
@@ -49,10 +77,18 @@ new Vue({
                 value: start
             },
         ],
+        msg: {
+            email: '',
+            phone: ''
+        },
+        dataOrder: {
+            customerName: '',
+            customerEmail: '',
+            customerPhone: ''
+        }
     },
     methods : {
         onDayClick(day) {
-            console.log(day);
             this.itemIdPickerSelected = day.id;
             this.daySelected = this.formatDate(this.dateRange.start);
             this.selectedDate = this.dateRange.start;
@@ -88,11 +124,42 @@ new Vue({
             today.setHours(0, 0, 0, 0);
             return inputDate <= today;
         },
+        isLetter(e) {
+            let char = String.fromCharCode(e.keyCode);
+            if(/^[A-Za-z\s]+$/.test(char)) return true;
+            else e.preventDefault();
+        },
+        validateEmail() {
+            const email = this.dataOrder.customerEmail;
+            if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+                this.msg.email = 'Ingresa una direccion de correo válida';
+                this.dataOrder.customerEmail = '';
+            } else {
+                this.msg.email = '';
+            }
+        },
+        validatePhoneNumber() {
+            const phone = this.dataOrder.customerPhone;
+            if (!/^3\d{9}$/.test(phone)) {
+                this.msg.phone = 'Ingresa un número válido que comience con 3 y tenga 10 dígitos';
+                this.dataOrder.customerPhone = '';
+            } else {
+                this.msg.phone = '';
+            }
+        },
         proceedToPay() {
-            checkout.open(function (result) {
-                var transaction = result.transaction;
-                console.log("Transaction ID: ", transaction.id);
-                console.log("Transaction object: ", transaction);
+            Swal.fire({
+                title: "¿ Desea realizar el agendamiento ?",
+                text: "A Continuación se procederá a realizar el agendamiento en nuestro sistema y en las próximas horas usted será contactado para realizar" +
+                    "la confirmación de la misma y también de los detalles.",
+                showCancelButton: true,
+                cancelButtonText: 'Cancelar',
+                icon: "info"
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Swal.fire("Información guardada con éxito !", "", "success");
+                }
             });
         }
     },
@@ -129,36 +196,9 @@ new Vue({
             return 'America/Bogota';
         },
         disableForPay() {
-            return this.timeStart === this.timeEnd;
+            return this.timeStart === this.timeEnd || this.dataOrder.customerName === ''
+                || this.dataOrder.customerEmail === '' || this.dataOrder.customerPhone === '' || this.msg.email !== ''
+                || this.msg.phone !== '';
         }
     }
 });
-
-let checkout = new WidgetCheckout({
-    currency: 'COP',
-    amountInCents: 2490000,
-    reference: 'AD002901221',
-    publicKey: 'pub_fENJ3hdTJxdzs3hd35PxDBSMB4f85VrgiY3b6s1',
-    signature: {integrity : '3a4bd1f3e3edb5e88284c8e1e9a191fdf091ef0dfca9f057cb8f408667f054d0'},
-    redirectUrl: 'https://transaction-redirect.wompi.co/check', // Opcional
-    expirationTime: '2023-06-09T20:28:50.000Z', // Opcional
-    taxInCents: { // Opcional
-        vat: 1900,
-        consumption: 800
-    },
-    customerData: { // Opcional
-        email:'lola@gmail.com',
-        fullName: 'Lola Flores',
-        phoneNumber: '3040777777',
-        phoneNumberPrefix: '+57',
-        legalId: '123456789',
-        legalIdType: 'CC'
-    },
-    shippingAddress: { // Opcional
-        addressLine1: "Calle 123 # 4-5",
-        city: "Bogota",
-        phoneNumber: '3019444444',
-        region: "Cundinamarca",
-        country: "CO"
-    }
-})
