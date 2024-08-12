@@ -5,7 +5,11 @@ Description: Un plugin básico de ejemplo.
 Version: 1.0
 Author: Eric Js
 */
+
+use model\Order;
+
 require_once 'model/Employees.php';
+require_once 'model/Order.php';
 require_once 'shortcodes/main.php';
 function agregar_menu_plugin() {
     add_menu_page(
@@ -57,7 +61,7 @@ register_activation_hook(__FILE__, 'create_orders_table');
 
 
 // Función para encolar el CSS
-function encolar_estilos_plugin($hook) {
+function enqueue_script_and_styles_plugin($hook) {
     // Verifica que estamos en las páginas del plugin
     if ($hook != 'toplevel_page_booking-basic' && $hook != 'booking-basic_page_booking-basic-vista-1' && $hook != 'booking-basic_page_booking-basic-vista-2') {
         return;
@@ -82,7 +86,7 @@ function encolar_estilos_plugin($hook) {
 }
 
 // Hook para encolar los estilos en el admin
-add_action('admin_enqueue_scripts', 'encolar_estilos_plugin');
+add_action('admin_enqueue_scripts', 'enqueue_script_and_styles_plugin');
 
 function showMenuItem1(): void
 {
@@ -101,7 +105,7 @@ function showMenuItem2(): void
 function pluginAssets(): void
 {
     #wp_enqueue_script( 'vue', 'https://cdn.jsdelivr.net/npm/vue/dist/vue.js', ['jquery'], '2', true );
-    wp_enqueue_script( 'wompi', 'https://checkout.wompi.co/widget.js', [], '1', true );
+    #wp_enqueue_script( 'wompi', 'https://checkout.wompi.co/widget.js', [], '1', true );
 
     wp_enqueue_script( 'vue', 'https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js', ['jquery'], '2', true );
     wp_enqueue_script( 'v-calendar', 'https://unpkg.com/v-calendar', ['vue'], '2.4.2', true );
@@ -110,6 +114,48 @@ function pluginAssets(): void
     wp_enqueue_style('sweetalert2-style', 'https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css');
 
     wp_enqueue_script('custom-script-frontend', plugin_dir_url(__FILE__)  . '/templates/frontend/js/script.js', ['v-calendar'], '1.0', true);
+    wp_localize_script('custom-script-frontend', 'schedule_obj', [ 'ajax_url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('schedule_order_nonce')]);
+
     wp_enqueue_style('custom-style', plugin_dir_url(__FILE__)  . '/templates/frontend/css/calendar-front.css');
 }
 add_action('wp_enqueue_scripts', 'pluginAssets');
+
+
+// order functions
+
+/**
+ * @return void
+ */
+function order_ajax_handler(): void
+{
+    try {
+        check_ajax_referer('schedule_order_nonce', 'security');
+        // match for call functions
+        $handle = isset($_POST['handle']) ? sanitize_text_field($_POST['handle']) : '';
+        $data = !empty($_POST['data']) ? $_POST['data'] : [];
+
+        if (empty($handle) || empty($data)) {
+            throw new Exception();
+        }
+
+        $order = new Order();
+        match ($handle) {
+            'setOrder' => $order->setOrder($data),
+            default => '',
+        };
+        $response = array(
+            'status' => 'success',
+            'message' => 'Este es un mensaje de éxito'
+        );
+    }catch (Exception $e){
+        $response = [
+            'status' => 'error',
+            'message' => 'Se ha producido un error: ' . $e->getMessage()
+        ];
+    }
+
+    wp_send_json($response);
+}
+
+add_action('wp_ajax_order_ajax_action', 'order_ajax_handler');
+add_action('wp_ajax_nopriv_order_ajax_action', 'order_ajax_handler');
