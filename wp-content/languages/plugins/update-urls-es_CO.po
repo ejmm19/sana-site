@@ -1,0 +1,125 @@
+# Translation of Plugins - Update URLs &#8211; Quick and Easy way to search old links and replace them with new links in WordPress - Stable (latest release) in Spanish (Colombia)
+# This file is distributed under the same license as the Plugins - Update URLs &#8211; Quick and Easy way to search old links and replace them with new links in WordPress - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2022-04-07 07:26:59+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: es_CO\n"
+"Project-Id-Version: Plugins - Update URLs &#8211; Quick and Easy way to search old links and replace them with new links in WordPress - Stable (latest release)\n"
+
+#: lite/includes/Admin/Templates/search-replace.php:53
+msgid "ERROR: Something may have gone wrong."
+msgstr "ERROR: Puede que algo haya ido mal."
+
+#: lite/includes/Admin/Templates/search-replace.php:64
+msgid "Success! Your URLs have been updated."
+msgstr "¡Correcto! Tus URL han sido actualizadas."
+
+#: lite/includes/Admin/Templates/search-replace.php:70
+msgid "Results"
+msgstr "Resultados"
+
+#: lite/includes/Admin/Templates/search-replace.php:83
+msgid "Please enter values for both the old url and the new url."
+msgstr "Por favor, introduce los valores de la antigua URL y de la nueva URL."
+
+#: lite/includes/Admin/Templates/search-replace.php:97
+msgid "After moving a website, %s lets you fix old URLs in content, excerpts, links, and custom fields."
+msgstr "Después de mover una web, %s te permite corregir las URL antiguas en el contenido, los extractos, los enlaces y los campos personalizados."
+
+#: lite/includes/Admin/Templates/search-replace.php:98
+msgid "WE RECOMMEND THAT YOU BACKUP YOUR WEBSITE."
+msgstr "RECOMENDAMOS QUE HAGAS UNA COPIA DE SEGURIDAD DE TU WEB."
+
+#: lite/includes/Admin/Templates/search-replace.php:99
+msgid "You may need to restore it if incorrect URLs are entered in the fields below."
+msgstr "Puede que tengas que restaurarla si se han introducido URL incorrectas en los siguientes campos."
+
+#: lite/includes/Admin/Templates/search-replace.php:107
+msgid "Old URL"
+msgstr "URL antigua"
+
+#: lite/includes/Admin/Templates/search-replace.php:129
+msgid "New URL"
+msgstr "Nueva URL"
+
+#: lite/includes/Admin/Templates/search-replace.php:159
+msgid "Choose which URLs should be updated"
+msgstr "Elige qué URL deberían ser actualizadas"
+
+#: lite/includes/Admin/Templates/search-replace.php:5
+msgid "URLs in excerpts"
+msgstr "URL en los extractos"
+
+#: lite/includes/Admin/Templates/search-replace.php:7
+msgid "URLs in links"
+msgstr "URL en los enlaces"
+
+#: lite/includes/Admin/Templates/search-replace.php:8
+msgid "URLs in custom fields and meta boxes"
+msgstr "URL en campos personalizados y cajas meta"
+
+#: lite/includes/Admin/Templates/search-replace.php:197
+msgid "Update URLs NOW"
+msgstr "Actualizar las URL AHORA"
+
+#. Plugin Name of the plugin
+#: update-urls.php lite/includes/Admin/Templates/other-products.php:23
+msgid "Update URLs"
+msgstr "Update URLs"
+
+#: lite/includes/Helper.php:562
+msgid "Content Items (Posts, Pages, Custom Post Types, Revisions)"
+msgstr "Elementos de contenido (entradas, páginas, tipos de contenido personalizado, revisiones)"
+
+#: lite/includes/Helper.php:566
+msgid "Excerpts"
+msgstr "Extractos"
+
+#: lite/includes/Helper.php:570
+msgid "Attachments"
+msgstr "Adjuntos"
+
+#: lite/includes/Helper.php:574
+msgid "Links"
+msgstr "Enlaces"
+
+#: lite/includes/Helper.php:578
+msgid "Custom Fields"
+msgstr "Campos personalizados"
+
+#: lite/includes/Helper.php:582
+msgid "GUIDs"
+msgstr "GUID"
+
+#: lite/includes/Admin/Templates/search-replace.php:17
+#: lite/includes/Admin/Templates/search-replace.php:23
+#: lite/includes/Admin/Templates/search-replace.php:83
+msgid "ERROR"
+msgstr "ERROR"
+
+#: lite/includes/Admin/Templates/search-replace.php:17
+msgid "Please try again."
+msgstr "Por favor, inténtalo de nuevo."
+
+#: lite/includes/Admin/Templates/search-replace.php:23
+#: lite/includes/Admin/Templates/search-replace.php:55
+#: lite/includes/Admin/Templates/search-replace.php:83
+msgid "Your URLs have not been updated."
+msgstr "Tus URL no han sido actualizadas."
+
+#: lite/includes/Admin/Templates/search-replace.php:23
+msgid "Please select at least one checkbox."
+msgstr "Por favor, selecciona al menos una casilla de verificación."
+
+#: lite/includes/Admin/Templates/search-replace.php:39
+msgid "Why do the results show 0 URLs updated?"
+msgstr "¿Por qué los resultados muestran que se han actualizado 0 URL?"
+
+#: lite/includes/Admin/Templates/search-replace.php:39
+msgid "This happens if a URL is incorrect OR if it is not found in the content. Check your URLs and try again."
+msgstr "Esto ocurre si una URL es incorrecta O si no se ha encontrado en el contenido. Comprueba tus URL e inténtalo de nuevo."

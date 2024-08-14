@@ -56,6 +56,7 @@ define( 'AUTH_SALT',        '`AM)n#<$l)aLm#tEx[|6p,B/03hbC, r`[`9s}+:ld2/`KDOqLn
 define( 'SECURE_AUTH_SALT', '|UrLfROjfe+M3|lqS.1u7Ifa#<!&oTEJ9S{ykIx~w1CvYfDi!nC6q-yC=Y@lj^9p' );
 define( 'LOGGED_IN_SALT',   'V&rFEOp]+.b;Y[vt,6x4yB=I$$Irg*NWEegkW_?!zGf+!iHx`yJI/RMM.MJ${HOn' );
 define( 'NONCE_SALT',       'thjQBq|=Ze;%-LpyZp!#IoD#t3|/udSyoQE}NrRm<wt_BZ/{Bw-w{O!,=+Fg|5:c' );
+#define('AIOS_DISABLE_LOGIN_WHITELIST', true);
 
 /**#@-*/
 

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2024-03-12 08:39:41+0000\n"
+"PO-Revision-Date: 2024-06-26 04:16:18+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,10 @@ msgstr ""
 "X-Generator: GlotPress/4.0.1\n"
 "Language: es_CO\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
+
+#: includes/contact-form.php:576
+msgid "Invalid action URL is detected."
+msgstr "Se ha detectado una URL de acción no válida."
 
 #: modules/constant-contact/service.php:371
 msgid "This feature is deprecated. You are not recommended to use it."
@@ -23,7 +27,7 @@ msgstr "https://contactform7.com/2024/02/02/we-end-the-constant-contact-integrat
 msgid "Warning:"
 msgstr "Atención:"
 
-#: modules/checkbox.php:285 modules/select.php:217
+#: modules/checkbox.php:299 modules/select.php:217
 msgid "Undefined value was submitted through this field."
 msgstr "Se envió un valor indefinido a través de este campo."
 
@@ -79,6 +83,7 @@ msgid "Contact form not found."
 msgstr "Formulario de contacto no encontrado."
 
 #: includes/contact-form-functions.php:263 includes/contact-form.php:575
+#: includes/js/index.js:1
 msgid "Error:"
 msgstr "Error:"
 
@@ -170,7 +175,7 @@ msgid "The request payload format is not supported."
 msgstr "El formato de la carga útil de la solicitud no es compatible."
 
 #. translators: 1: WordPress hook name, 2: version number
-#: includes/functions.php:577
+#: includes/functions.php:575
 msgid "Hook %1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s with no alternative available."
 msgstr "El gancho %1$s está <strong>obsoleto</strong> desde la versión de Contact Form 7 %2$s, sin ninguna alternativa disponible."
 
@@ -192,7 +197,7 @@ msgstr "Por favor, rellena este campo."
 
 #. translators: 1: PHP function name, 2: version number, 3: alternative
 #. function name
-#: includes/functions.php:528
+#: includes/functions.php:526
 msgid "Function %1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 msgstr "¡La función %1$s está <strong>obsoleta</strong> desde Contact Form 7 versión %2$s! Usa %3$s en su lugar."
 
@@ -202,7 +207,7 @@ msgstr "Protección contra spam"
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Contact Form 7 version number.
-#: includes/functions.php:612
+#: includes/functions.php:610
 msgid "Function %1$s was called incorrectly. %2$s %3$s"
 msgstr "Se ha llamado a la función %1$s incorrectamente. %2$s %3$s"
 
@@ -469,7 +474,7 @@ msgid "Disallowed words are used."
 msgstr "Se están usando palabras no permitidas."
 
 #. translators: %s: Contact Form 7 version number.
-#: includes/functions.php:604
+#: includes/functions.php:602
 msgid "(This message was added in Contact Form 7 version %s.)"
 msgstr "(Este mensaje se ha añadido en Contact Form 7 versión %s.)"
 
@@ -502,7 +507,7 @@ msgstr "%1$s y %2$s"
 msgid "Additional settings"
 msgstr "Ajustes adicionales"
 
-#: modules/constant-contact/service.php:352 modules/recaptcha/service.php:256
+#: modules/constant-contact/service.php:352 modules/recaptcha/service.php:260
 #: modules/sendinblue/service.php:123 modules/sendinblue/service.php:131
 #: modules/stripe/service.php:141
 msgid "Error"
@@ -516,7 +521,7 @@ msgstr "El tamaño total de los archivos adjuntos es demasiado grande."
 msgid "Unavailable HTML elements are used in the form template."
 msgstr "Se están usando elementos HTML no disponibles en la plantilla del formulario."
 
-#: modules/recaptcha/service.php:284
+#: modules/recaptcha/service.php:288
 msgid "reCAPTCHA is active on this site."
 msgstr "reCAPTCHA está activo en este sitio."
 
@@ -562,19 +567,19 @@ msgid "Connection established."
 msgstr "Conexión establecida."
 
 #. translators: 1: response code, 2: message, 3: body, 4: URL
-#: includes/functions.php:651
+#: includes/functions.php:649
 msgid "HTTP Response: %1$s %2$s %3$s from %4$s"
 msgstr "Respuesta HTTP: %1$s %2$s desde %3$s "
 
-#: modules/recaptcha/service.php:356 modules/stripe/service.php:253
+#: modules/recaptcha/service.php:360 modules/stripe/service.php:253
 msgid "Save Changes"
 msgstr "Guardar cambios"
 
-#: modules/recaptcha/service.php:270
+#: modules/recaptcha/service.php:274
 msgid "reCAPTCHA protects you against spam and other types of automated abuse. With Contact Form 7&#8217;s reCAPTCHA integration module, you can block abusive form submissions by spam bots."
 msgstr "reCapTCHA protege contra el spam y otros tipos de abuso automatizados. Con el módulo de integración de reCAPTCHA, puedes bloquear envíos de forma abusiva por bots de spam."
 
-#: modules/recaptcha/recaptcha.php:261 modules/recaptcha/service.php:277
+#: modules/recaptcha/recaptcha.php:261 modules/recaptcha/service.php:281
 msgid "reCAPTCHA (v3)"
 msgstr "reCAPTCHA (v3) "
 
@@ -586,7 +591,7 @@ msgstr "Las claves de API para reCAPTCHA v3 son diferentes a las de v2; las clav
 msgid "Connect to the Constant Contact API"
 msgstr "Conecta con la API de Constant Contact"
 
-#: modules/recaptcha/service.php:351 modules/stripe/service.php:249
+#: modules/recaptcha/service.php:355 modules/stripe/service.php:249
 msgctxt "API keys"
 msgid "Remove Keys"
 msgstr "Eliminar claves"
@@ -607,7 +612,7 @@ msgstr "Clave secreta de la aplicación"
 msgid "API Key"
 msgstr "Clave API"
 
-#: modules/constant-contact/service.php:401 modules/recaptcha/service.php:294
+#: modules/constant-contact/service.php:401 modules/recaptcha/service.php:298
 #: modules/stripe/service.php:183
 msgid "Setup Integration"
 msgstr "Integración de la instalación "
@@ -857,7 +862,7 @@ msgstr "1 error de configuración detectado"
 
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: includes/functions.php:566
+#: includes/functions.php:564
 msgid "Hook %1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 msgstr "¡El gancho %1$s está <strong>obsoleto</strong> desde la versión %2$s de Contact Form 7! Usa %3$s en su lugar."
 
@@ -986,24 +991,24 @@ msgid "You are not allowed to validate configuration."
 msgstr "No tienes permiso para validar la configuración."
 
 #: admin/includes/welcome-panel.php:64 admin/includes/welcome-panel.php:160
-#: modules/recaptcha/recaptcha.php:260 modules/recaptcha/service.php:276
+#: modules/recaptcha/recaptcha.php:260 modules/recaptcha/service.php:280
 msgid "https://contactform7.com/recaptcha/"
 msgstr "https://contactform7.com/recaptcha/"
 
-#: modules/recaptcha/service.php:327 modules/stripe/service.php:228
+#: modules/recaptcha/service.php:331 modules/stripe/service.php:228
 msgid "Secret Key"
 msgstr "Clave secreta"
 
-#: modules/recaptcha/service.php:310
+#: modules/recaptcha/service.php:314
 msgid "Site Key"
 msgstr "Clave del sitio"
 
-#: modules/recaptcha/service.php:262 modules/sendinblue/service.php:139
+#: modules/recaptcha/service.php:266 modules/sendinblue/service.php:139
 #: modules/stripe/service.php:149
 msgid "Settings saved."
 msgstr "Ajustes guardados."
 
-#: modules/recaptcha/service.php:257 modules/sendinblue/service.php:132
+#: modules/recaptcha/service.php:261 modules/sendinblue/service.php:132
 #: modules/stripe/service.php:142
 msgid "Invalid key values."
 msgstr "Valores de clave no válidos."
@@ -1319,34 +1324,34 @@ msgstr "La fecha es menor al límite mínimo"
 msgid "Date format that the sender entered is invalid"
 msgstr "El formato de fecha ingresado por el remitente no es válido"
 
-#: modules/checkbox.php:420 modules/date.php:265 modules/number.php:289
+#: modules/checkbox.php:434 modules/date.php:265 modules/number.php:289
 #: modules/select.php:301 modules/text.php:321 modules/textarea.php:205
 msgid "To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab."
 msgstr "Para recibir los datos enviados a través de este campo, debes insertar la etiqueta correspondiente (%s) en alguno de los campos de la pestaña Correo electrónico."
 
-#: modules/checkbox.php:390
+#: modules/checkbox.php:404
 msgid "Make checkboxes exclusive"
 msgstr "Hacer que las casillas de verificación sean exclusivas"
 
-#: modules/checkbox.php:388
+#: modules/checkbox.php:402
 msgid "Wrap each item with label element"
 msgstr "Envolver cada elemento con la etiqueta <label>"
 
-#: modules/checkbox.php:387
+#: modules/checkbox.php:401
 msgid "Put a label first, a checkbox last"
 msgstr "Pon primero una etiqueta, la casilla de verificación al final"
 
-#: modules/checkbox.php:386 modules/select.php:270
+#: modules/checkbox.php:400 modules/select.php:270
 msgid "One option per line."
 msgstr "Una opción por línea."
 
-#: modules/checkbox.php:369 modules/date.php:208 modules/file.php:165
+#: modules/checkbox.php:383 modules/date.php:208 modules/file.php:165
 #: modules/number.php:232 modules/select.php:254 modules/text.php:252
 #: modules/textarea.php:165
 msgid "Required field"
 msgstr "Campo obligatorio"
 
-#: modules/checkbox.php:365 modules/checkbox.php:368 modules/date.php:204
+#: modules/checkbox.php:379 modules/checkbox.php:382 modules/date.php:204
 #: modules/date.php:207 modules/file.php:161 modules/file.php:164
 #: modules/number.php:223 modules/number.php:226 modules/select.php:250
 #: modules/select.php:253 modules/text.php:248 modules/text.php:251
@@ -1354,27 +1359,27 @@ msgstr "Campo obligatorio"
 msgid "Field type"
 msgstr "Tipo de campo"
 
-#: modules/checkbox.php:354 modules/select.php:240
+#: modules/checkbox.php:368 modules/select.php:240
 msgid "Checkboxes, radio buttons and menus"
 msgstr "Casillas de verificación, botones de radio y menús"
 
-#: modules/checkbox.php:354 modules/select.php:240
+#: modules/checkbox.php:368 modules/select.php:240
 msgid "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
 msgstr "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
 
-#: modules/checkbox.php:351
+#: modules/checkbox.php:365
 msgid "Generate a form-tag for a group of radio buttons. For more details, see %s."
 msgstr "Genera una etiqueta de formulario para un grupo de botones de radio. Para más detalles, consulta %s."
 
-#: modules/checkbox.php:349
+#: modules/checkbox.php:363
 msgid "Generate a form-tag for a group of checkboxes. For more details, see %s."
 msgstr "Genera una etiqueta de formulario para un grupo de casillas de verificación. Para más detalles, consulta %s."
 
-#: modules/checkbox.php:336
+#: modules/checkbox.php:350
 msgid "radio buttons"
 msgstr "botones de selección"
 
-#: modules/checkbox.php:334
+#: modules/checkbox.php:348
 msgid "checkboxes"
 msgstr "casillas de verificación"
 
@@ -1419,14 +1424,14 @@ msgstr "El código introducido es incorrecto."
 msgid "The code that sender entered does not match the CAPTCHA"
 msgstr "El código introducido por el remitente no coincide con el CAPTCHA"
 
-#: modules/acceptance.php:303 modules/checkbox.php:415 modules/date.php:260
+#: modules/acceptance.php:303 modules/checkbox.php:429 modules/date.php:260
 #: modules/file.php:204 modules/number.php:284 modules/quiz.php:249
 #: modules/really-simple-captcha.php:337 modules/select.php:296
 #: modules/submit.php:88 modules/text.php:316 modules/textarea.php:200
 msgid "Insert Tag"
 msgstr "Insertar etiqueta"
 
-#: modules/acceptance.php:290 modules/checkbox.php:402 modules/date.php:248
+#: modules/acceptance.php:290 modules/checkbox.php:416 modules/date.php:248
 #: modules/file.php:191 modules/number.php:272 modules/quiz.php:236
 #: modules/really-simple-captcha.php:310 modules/really-simple-captcha.php:325
 #: modules/select.php:283 modules/submit.php:75 modules/text.php:303
@@ -1434,7 +1439,7 @@ msgstr "Insertar etiqueta"
 msgid "Class attribute"
 msgstr "Atributo de clase"
 
-#: modules/acceptance.php:285 modules/checkbox.php:397 modules/date.php:243
+#: modules/acceptance.php:285 modules/checkbox.php:411 modules/date.php:243
 #: modules/file.php:186 modules/number.php:267 modules/quiz.php:231
 #: modules/really-simple-captcha.php:305 modules/really-simple-captcha.php:320
 #: modules/select.php:278 modules/submit.php:70 modules/text.php:298
@@ -1443,12 +1448,12 @@ msgid "Id attribute"
 msgstr "Atributo de ID"
 
 #: modules/acceptance.php:275 modules/acceptance.php:278
-#: modules/checkbox.php:381 modules/checkbox.php:384 modules/select.php:265
+#: modules/checkbox.php:395 modules/checkbox.php:398 modules/select.php:265
 #: modules/select.php:268
 msgid "Options"
 msgstr "Opciones"
 
-#: modules/acceptance.php:265 modules/checkbox.php:376 modules/date.php:214
+#: modules/acceptance.php:265 modules/checkbox.php:390 modules/date.php:214
 #: modules/file.php:171 modules/number.php:238 modules/quiz.php:215
 #: modules/really-simple-captcha.php:295 modules/select.php:260
 #: modules/text.php:258 modules/textarea.php:171
