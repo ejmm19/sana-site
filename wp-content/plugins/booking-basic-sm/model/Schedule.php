@@ -2,6 +2,8 @@
 
 namespace model;
 
+use helper\Time;
+
 class Schedule
 {
 
@@ -14,7 +16,7 @@ class Schedule
         $employeeData = [];
         if (!empty($attr) && isset($attr['employee'])) {
             $employeesModel = new Employees();
-            $order = new Order();
+            $order = new Order('');
             $employeeObject = $employeesModel->getEmployee($attr['employee']);
             if (!empty($employeeObject)) {
                 $employeeData['id'] = $employeeObject->ID;

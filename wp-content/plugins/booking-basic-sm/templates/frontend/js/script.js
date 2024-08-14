@@ -144,13 +144,13 @@ if (jQuery("#app").length > 0) {
             },
             isLetter(e) {
                 let char = String.fromCharCode(e.keyCode);
-                if(/^[A-Za-z\s]+$/.test(char)) return true;
+                if(/^[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+$/.test(char)) return true;
                 else e.preventDefault();
             },
             validateEmail() {
                 const email = this.dataOrder.customerEmail;
                 if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-                    this.msg.email = 'Ingresa una direccion de correo válida';
+                    this.msg.email = 'Ingresa una dirección de correo válida';
                     this.dataOrder.customerEmail = '';
                 } else {
                     this.msg.email = '';
@@ -187,8 +187,15 @@ if (jQuery("#app").length > 0) {
                             },
                             success: function(response) {
                                 if (response.status === 'success') {
-                                    // alert(response.message);
-                                    Swal.fire("Información guardada con éxito !", "", "success");
+                                    Swal.fire({
+                                        title: "Información guardada con éxito !",
+                                        confirmButtonText: "Ok",
+                                        icon: "success"
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = '/agendamiento';
+                                        }
+                                    });
                                 } else {
                                     alert('Ocurrió un error.');
                                 }
@@ -246,11 +253,9 @@ if (jQuery("#app").length > 0) {
                 if (newValue) {
                     jQuery(".id-"+newValue).addClass('disabled-picker');
                 }
-                // console.log(newValue);
                 let dateRage = [];
                 this.scheduledTime.forEach((el, i) => {
                     if (el.schedule_date === newValue) {
-                        // console.log(el);
                         dateRage.push({date_init: el.date_init, date_finish: el.date_finish});
                     }
                 });

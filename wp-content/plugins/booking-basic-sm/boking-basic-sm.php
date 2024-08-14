@@ -10,32 +10,17 @@ use model\Order;
 
 require_once 'model/Employees.php';
 require_once 'model/Order.php';
+require_once 'model/Config.php';
 require_once 'shortcodes/main.php';
-function agregar_menu_plugin() {
-    add_menu_page(
-        'Booking Basic',  // Título de la página
-        'Booking Basic',  // Título del menú
-        'manage_options', // Capacidad
-        'booking-basic',  // Slug del menú
-        'showMenuItem1',// Función que muestra la vista 1
-        'dashicons-calendar', // Icono del menú (puedes cambiar el icono)
-        30                  // Posición del menú
-    );
+require_once 'elements/menu.php';
+require_once 'filters/translate.php';
 
-    add_submenu_page(
-        'booking-basic',  // Slug del menú principal
-        'Employees',        // Título de la página del submenú
-        'Employees',        // Título del submenú
-        'manage_options', // Capacidad
-        'booking-basic-vista-2', // Slug del submenú
-        'showMenuItem2' // Función que muestra la vista 2
-    );
-}
 
-// Hook para agregar el menú en el panel de administración
-add_action('admin_menu', 'agregar_menu_plugin');
-
-function create_orders_table() {
+/**
+ * @return void
+ */
+function create_orders_table(): void
+{
     global $wpdb;
     $table_name = $wpdb->prefix . 'orders';
 
@@ -45,6 +30,8 @@ function create_orders_table() {
         id mediumint(9) NOT NULL AUTO_INCREMENT,
         email varchar(255) NOT NULL,
         name varchar(255) NOT NULL,
+        phone varchar(10) NOT NULL,
+        status varchar(10) DEFAULT 'pending' NOT NULL,
         employeeId mediumint(9) NOT NULL,
         schedule_date date NOT NULL,
         date_init datetime NOT NULL,
@@ -59,11 +46,40 @@ function create_orders_table() {
 
 register_activation_hook(__FILE__, 'create_orders_table');
 
+/**
+ * @return void
+ */
+function create_config_tabla(): void
+{
+    global $wpdb;
+    $table_name = $wpdb->prefix . 'config_data';
+
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+        path VARCHAR(255) NOT NULL UNIQUE,
+        value LONGTEXT NULL,
+        updated_at DATETIME DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+        PRIMARY KEY (id)
+    ) $charset_collate;";
+
+    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+    dbDelta($sql);
+}
+
+register_activation_hook(__FILE__, 'create_config_tabla');
+
+
+
 
 // Función para encolar el CSS
-function enqueue_script_and_styles_plugin($hook) {
+function enqueue_script_and_styles_plugin($hook): void
+{
     // Verifica que estamos en las páginas del plugin
-    if ($hook != 'toplevel_page_booking-basic' && $hook != 'booking-basic_page_booking-basic-vista-1' && $hook != 'booking-basic_page_booking-basic-vista-2') {
+    if ($hook != 'toplevel_page_booking-basic' && $hook != 'booking-basic_page_booking-basic-vista-1'
+        && $hook != 'booking-basic_page_booking-basic-employees' && $hook != 'booking-basic_page_booking-basic-scheduling'
+        && $hook != 'booking-basic_page_booking-basic-settings') {
         return;
     }
     wp_register_style(
@@ -73,7 +89,16 @@ function enqueue_script_and_styles_plugin($hook) {
         '5.3.3',
         'all'
     );
-    wp_enqueue_style('stylesheet', get_stylesheet_uri(), ['bootstrap'], '1.0', 'all');
+    wp_register_style(
+        'font-awesome',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css',
+        '',
+        '6.6.0'
+    );
+    wp_enqueue_style('stylesheet', get_stylesheet_uri(), ['bootstrap', 'font-awesome'], '1.0', 'all');
+    wp_enqueue_script( 'sweetalert2', 'https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js', [], '11.12.4', true );
+    wp_enqueue_style('sweetalert2-style', 'https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css');
+
     wp_enqueue_style('estilos_plugin', plugin_dir_url(__FILE__) . 'templates/wp-admin/css/admin.css');
 
     // scripts
@@ -83,20 +108,12 @@ function enqueue_script_and_styles_plugin($hook) {
     #wp_enqueue_script('vue', plugin_dir_url(__FILE__)  . '/templates/wp-admin/js/vuejs.js', null, '1.0', true);
     wp_enqueue_script( 'v-calendar', 'https://unpkg.com/v-calendar', ['vue'], '2.4.2', true );
     wp_enqueue_script('custom-script', plugin_dir_url(__FILE__)  . '/templates/wp-admin/js/custom-script.js', ['vue', 'v-calendar'], '1.0', true);
+    wp_localize_script('custom-script', 'schedule_obj', [ 'ajax_url' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('schedule_order_nonce')]);
 }
 
 // Hook para encolar los estilos en el admin
 add_action('admin_enqueue_scripts', 'enqueue_script_and_styles_plugin');
 
-function showMenuItem1(): void
-{
-    require_once plugin_dir_path(__FILE__) . '/templates/wp-admin/calendar.php';
-}
-
-function showMenuItem2(): void
-{
-    require_once plugin_dir_path(__FILE__) . '/templates/wp-admin/employees.php';
-}
 
 // in frontend
 /**
@@ -139,8 +156,12 @@ function order_ajax_handler(): void
         }
 
         $order = new Order();
+        $config = new \model\Config();
         match ($handle) {
-            'setOrder' => $order->setOrder($data),
+            'setOrder' => $order->setOrder($data, true),
+            'deleteOrder' => $order->deleteOrder($data),
+            'approveOrder' => $order->approveOrder($data),
+            'setMultipleConfig' => $config->setMultipleConfig($data),
             default => '',
         };
         $response = array(

@@ -1,4 +1,31 @@
 @import url('variables');
+/* Preloader styles */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff; /* Fondo blanco para el preloader */
+  z-index: 9999; /* Asegúrate de que esté sobre todo el contenido */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-top-color: #333; /* Color del spinner */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 a{
   font-family: "Noto Sans", sans-serif;
   font-weight: 600;

@@ -5,7 +5,6 @@ $employees = $employeesModel->getEmployees();
 $employeeId = !empty($_POST['employeeId']) ? $_POST['employeeId'] : '';
 ?>
 <h1><?= __('Employees') ?></h1>
-<p><?= __('Contenido de la segunda vista.') ?></p>
 
 <div id="app-calendar" class="container-fuid">
     <div class="row w-100">

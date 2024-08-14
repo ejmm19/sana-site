@@ -1,3 +1,8 @@
+window.addEventListener('load', function () {
+    let preloader = document.getElementById('preloader');
+    preloader.style.display = 'none';
+});
+
 let overlayImages = jQuery('.image-text-hover');
 
 jQuery.each(overlayImages, function (i, element) {

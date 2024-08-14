@@ -8,6 +8,9 @@
     <?php wp_head(); ?>
 </head>
 <body>
+<div id="preloader">
+    <div class="spinner"></div>
+</div>
 <header id="mf-header" class="shadow-1">
     <div class="container">
         <div class="row align-items-center">
