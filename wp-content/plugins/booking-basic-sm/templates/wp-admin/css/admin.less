@@ -1,0 +1,35 @@
+body, a{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif !important;
+}
+#app-calendar{
+  .vc-pane-layout{
+    .vc-header{
+      padding: 20px 18px 20px 18px;
+      .vc-title{
+        font-size: 2em;
+      }
+    }
+    .vc-weeks{
+      .vc-day{
+        min-height: 100px;
+        .vc-highlight{
+          width: 50px;
+          height: 50px;
+        }
+        .vc-day-content{
+          font-size: 2em;
+        }
+      }
+    }
+  }
+  #employees-row{
+    /*height:560px;
+    overflow-y: scroll;*/
+    .card{
+      cursor: pointer;
+      img, div{
+        pointer-events: none;
+      }
+    }
+  }
+}

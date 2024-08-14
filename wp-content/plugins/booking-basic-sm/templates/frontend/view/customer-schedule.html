@@ -1,0 +1,74 @@
+<div id="app" ref="CalendarPane">
+    <div class="row">
+        <div id="content-calendar-app" class="col-6" data-active-item='[employeeData]'>
+            <h5 class="text-center">Seleccione fecha y hora de su agendamiento</h5>
+            <v-date-picker
+                    :disabled-dates='{ weekdays: [1] }'
+                    :attributes="attrs"
+                    is-expanded
+                    is-range
+                    :min-date='new Date()'
+                    :drag-attribute="selectDragAttribute"
+                    mode="dateTime"
+                    v-model="dateRange"
+                    :timezone="timezone"
+                    :valid-hours="validHours"
+                    :minute-increment="30"
+                    @dayclick="onDayClick($event)"
+                    dailyInterval="3"
+            />
+            {{ scheduleInfo | capitalize }}
+        </div>
+        <div class="col-6">
+            <h4>Ingrese su información de agendamiento</h4>
+            <hr class="m-0">
+            <table class="table">
+                <tbody>
+                <tr>
+                    <td>Nombres y apellidos * : </td>
+                    <td width="70%">
+                        <input type="text" v-model="dataOrder.customerName" v-on:keypress="isLetter($event)" class="form-control" placeholder="Ingrese su Nombre y Apellido">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Correo electónico * : </td>
+                    <td>
+                        <input type="email" v-model="dataOrder.customerEmail" @blur="validateEmail($event)" class="form-control" placeholder="Ingrese su Correo electónico">
+                        <small class="text-danger">{{ msg.email }}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Celular de contacto * : </td>
+                    <td>
+                        <input type="tel" v-model="dataOrder.customerPhone" @blur="validatePhoneNumber" class="form-control" placeholder="Ingrese su Teléfono">
+                        <small class="text-danger">{{ msg.phone }}</small>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Orientador : </td>
+                    <td>{{ employeeData.fullName }}</td>
+                </tr>
+                <tr>
+                    <td>Día : </td>
+                    <td>{{ daySelected | capitalize }}</td>
+                </tr>
+                <tr>
+                    <td>Hora de inicio : </td>
+                    <td>{{ timeStart }}</td>
+                </tr>
+                <tr>
+                    <td>Hora de finalización : </td>
+                    <td>{{ timeEnd }}</td>
+                </tr>
+                </tbody>
+            </table>
+            <p v-if="!isDateValid" class="py-2">
+                <small class="text-danger">{{ dateInvalidMsg }}</small>
+            </p>
+            <!--<img :src="employeeData.logoPago"alt="wompi pago">-->
+            <button class="btn btn-primary text-capitalize w-100" :disabled="disableForPay" v-on:click="proceedToPay">
+                Agendar
+            </button>
+        </div>
+    </div>
+</div>
